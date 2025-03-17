@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feedback</title>
+  <style>
+    /* Reset some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and global styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    /* Comment Form Section */
+    .comment-form {
+      width: 100%;
+      max-width: 600px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .comment-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .comment-form button {
+      width: 100%;
+      padding: 12px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .comment-form button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Comment List Section */
+    .comment-list {
+      width: 100%;
+      max-width: 600px;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .comment-item {
+      padding: 10px;
+      margin-bottom: 15px;
+      background-color: #f1f1f1;
+      border-radius: 8px;
+    }
+
+    .comment-item p {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .comment-item .username {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .comment-item .timestamp {
+      font-size: 12px;
+      color: #777;
+    }
+
+    /* Back link */
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      text-decoration: none;
+      color: #3498db;
+      font-size: 18px;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Leave Your Feedback</h1>
+
+  <!-- Comment Form -->
+  <div class="comment-form">
+    <textarea id="feedback-text" placeholder="Type your feedback here..." rows="5"></textarea><br>
+    <button onclick="submitComment()">Submit Feedback</button>
+  </div>
+
+  <!-- Comment List -->
+  <div class="comment-list" id="comment-list">
+    <!-- Comments will be dynamically added here -->
+  </div>
+
+  <div class="back-link">
+    <a href="C:\Users\p69399\Documents\Untitled-3.html">Back to the Store</a>
+  </div>
+
+  <script>
+    // Retrieve existing comments from localStorage
+    let comments = JSON.parse(localStorage.getItem('comments')) || [];
+
+    // Function to display all comments
+    function displayComments() {
+      const commentList = document.getElementById('comment-list');
+      commentList.innerHTML = ''; // Clear the current comments
+
+      // Loop through comments and display each one
+      comments.forEach(comment => {
+        const commentItem = document.createElement('div');
+        commentItem.classList.add('comment-item');
+        
+        const commentDate = new Date(comment.timestamp).toLocaleString();
+
+        commentItem.innerHTML = `
+          <p class="username">${comment.username}</p>
+          <p>${comment.text}</p>
+          <p class="timestamp">${commentDate}</p>
+        `;
+        
+        commentList.appendChild(commentItem);
+      });
+    }
+
+    // Function to handle comment submission
+    function submitComment() {
+      const feedbackText = document.getElementById('feedback-text').value.trim();
+      if (feedbackText) {
+        const newComment = {
+          username: 'Anonymous',  // You can modify this to prompt for a name or pull from a user session
+          text: feedbackText,
+          timestamp: Date.now()
+        };
+
+        // Add the new comment to the comments array
+        comments.push(newComment);
+
+        // Save updated comments to localStorage
+        localStorage.setItem('comments', JSON.stringify(comments));
+
+        // Clear the textarea and re-display the comments
+        document.getElementById('feedback-text').value = '';
+        displayComments();
+      }
+    }
+
+    // Display the comments when the page loads
+    window.onload = displayComments;
+  </script>
+
+</body>
+</html>
