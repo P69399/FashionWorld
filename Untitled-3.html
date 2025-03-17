@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minimalist Store</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Reset some default styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body and global styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+
+    /* Navigation bar */
+    nav {
+      background-color: #fff;
+      padding: 20px 0;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav ul {
+      list-style: none;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    nav ul li a i {
+      margin-right: 8px;
+    }
+
+    /* Cart counter */
+    #cart-count {
+      background-color: #e74c3c;
+      color: white;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-left: 5px;
+    }
+
+    /* Hero section */
+    .hero {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 100px 20px;
+    }
+
+    .hero h1 {
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin: 20px 0;
+    }
+
+    .hero button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .hero button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Product grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+      gap: 30px;
+      padding: 40px 20px;
+    }
+
+    .product-card {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    /* Product card hover effect */
+    .product-card:hover {
+      background-color: #f1f1f1;
+      transform: scale(1.05);
+    }
+
+    .product-card img {
+      width: 400px;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product-card h3 {
+      margin: 20px 0;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .product-card p {
+      font-size: 16px;
+      color: #777;
+      margin-bottom: 15px;
+    }
+
+    .product-card button {
+      padding: 10px 20px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .product-card button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #fff;
+      padding: 40px 20px;
+      text-align: center;
+      box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    footer p {
+      color: #333;
+      font-size: 16px;
+    }
+
+    footer a {
+      color: #3498db;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation bar -->
+  <nav>
+    <ul>
+        <li><a href="#"><i class="fas fa-home"></i> Home</a></li> <!-- Home icon -->
+        <li><a href="C:\Users\p69399\Documents\basket.html"><i class="fas fa-shopping-cart"></i> View Cart <span id="cart-count">(0)</span></a></li> <!-- Cart icon with count -->
+        <li><a href="feedback.html"><i class="fas fa-comments"></i> Feedback</a></li> <!-- Feedback icon -->
+    </ul>
+  </nav>
+
+  <!-- Hero section -->
+  <section class="hero">
+    <h1>Fashion World</h1>
+    <p>Bringing fashion to the world</p>
+  </section>
+
+  <!-- Product grid (2x2 layout) -->
+  <section class="product-grid">
+    <div class="product-card" data-id="1" data-name="Five Nights at Diddies" data-price="45.5644">
+      <img src="https://i.etsystatic.com/53766280/r/il/80dea5/6605676416/il_794xN.6605676416_ds07.jpg" alt="Product 1">
+      <h3>Five Nights at Diddies</h3>
+      <h4>£45.5644</h4>
+      <p>Our stylish diddy shirt will keep you from running out of power in night 5</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-id="2" data-name="Designer Tee" data-price="45">
+      <img src="https://i.etsystatic.com/54811241/r/il/3cd28a/6447573824/il_794xN.6447573824_r21n.jpg" alt="Product 2">
+      <h3>Designer Tee</h3>
+      <h4>£45</h4>
+      <p>Sigma</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-id="3" data-name="Manly Outfit" data-price="4546465467457456456">
+      <img src="https://m.media-amazon.com/images/I/612K98dAYlS._AC_SX385_.jpg" alt="Product 3">
+      <h3>Manly Outfit</h3>
+      <h4>£4546465467457456456</h4>
+      <p>Number one gym outfit recommended by Sam Sulek</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+    <div class="product-card" data-id="4" data-name="Buckingham Palace" data-price="34.23">
+      <img src="https://www.royal.uk/sites/default/files/styles/grid_3x2/public/images/news/rewiring-of-buckingham-palace.jpg?itok=hngh42EP" alt="Product 4">
+      <h3>Buckingham Palace</h3>
+      <h4>£34.23</h4>
+      <p>The one and only</p>
+      <button onclick="addToCart(this)">Add to Cart</button>
+    </div>
+  </section>
+
+  <script>
+    // Add to cart function
+    function addToCart(button) {
+      const product = button.parentElement;
+      const productId = product.getAttribute('data-id');
+      const productName = product.getAttribute('data-name');
+      const productPrice = product.getAttribute('data-price');
+
+      // Create an item object
+      const item = {
+        id: productId,
+        name: productName,
+        price: productPrice
+      };
+
+      // Get the current cart from localStorage (or initialize an empty array if it doesn't exist)
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      // Add the item to the cart
+      cart.push(item);
+
+      // Save the updated cart back to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
+
+      // Update cart count in navigation
+      document.getElementById('cart-count').innerText = `(${cart.length})`;
+
+      alert(`${productName} has been added to your cart.`);
+    }
+
+    // Update cart count on page load
+    window.onload = function() {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      document.getElementById('cart-count').innerText = `(${cart.length})`;
+    };
+  </script>
+
+</body>
+</html>
